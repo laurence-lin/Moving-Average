@@ -9,18 +9,17 @@ Define simple neural network arthitecture
 def Normalization(train_set, test_set):
     '''
     Define normalization to training set and test set
-    train_set: 2D array of [batchsize, features]
-    test_set: 2D array of [batchsize, features]
-    return: same size 2D array of train set & test set after normalization
+    train_set: 1D array of [batchsize, features]
+    test_set: 1D array of [batchsize, features]
+    return: same size 1D array of train set & test set after normalization
     '''
-    for feature in range(train_set.shape[1]):
-        mean = np.mean(train_set[:, feature])
-        var = np.var(train_set[:, feature])
-        train_set[:, feature] = (train_set[:, feature] - mean) / var
+    mean = np.mean(train_set[:])
+    var = np.var(train_set[:])
+    train_set[:] = (train_set[:] - mean) / var
     
-        mean_test = np.mean(test_set[:, feature])
-        var_test = np.var(test_set[:, feature])
-        test_set[:, feature] = (test_set[:, feature] - mean_test) / var_test
+    mean_test = np.mean(test_set[:])
+    var_test = np.var(test_set[:])
+    test_set[:] = (test_set[:] - mean_test) / var_test
         
     return train_set, test_set
        
@@ -52,9 +51,9 @@ def hidden_bn_relu(layer_input, out_feature):
     
     
 # Prediction network
-n1_hidden = 500
-n2_hidden = 250
-n3_hidden = 10
+n1_hidden = 10
+n2_hidden = 5
+n3_hidden = 3
 n_out = 1
 def inference(input_x, reuse):
     
